@@ -3,14 +3,14 @@
 
 html, body {
   background-color: #f2f2f2;
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    font-size: 16px;
-    color: #555;
-    line-height: 1.6em;
-    -webkit-font-smoothing: antialiased;
-    -webkit-overflow-scrolling: touch;
-    height: 100%;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6em;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -125,13 +125,11 @@ a.navbar-brand:hover {
 
 #header {
 	background-color: #444;
-	background: url(../img/BG_seecows_Ski.png) no-repeat center top;
+	background: url(../img/BG_seecows_Ski.png) no-repeat center center;
 	margin-top: -20px;
 	padding-top: 150px;
 	background-attachment: relative;
-	background-position: center center;
-  height: 100%;
-	width: 100%;
+  min-height: 100%;
 
   -webkit-background-size: 100%;
   -moz-background-size: 100%;
@@ -142,6 +140,8 @@ a.navbar-brand:hover {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+
+
   z-index: -1;
 }
 

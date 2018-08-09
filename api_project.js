@@ -1,1 +1,0 @@
-define({  "name": "SEECOWS",  "version": "0.1.0",  "description": "Seecows API Doc",  "title": "SEECOWS API DOC",  "url": "http://seecows.herokuapp.com/api/v1",  "sampleUrl": false,  "apidoc": "0.2.0",  "generator": {    "name": "apidoc",    "time": "2015-12-16T14:15:11.400Z",    "url": "http://apidocjs.com",    "version": "0.14.0"  }});

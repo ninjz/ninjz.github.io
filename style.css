@@ -1,0 +1,33 @@
+div.content {
+	margin: auto;
+	width: 390px;
+}
+
+div.side {
+	margin:auto;
+	width: 500px;
+	background-color: orange;
+}
+
+header {
+	text-align: center;
+	padding: 10px;
+}
+
+canvas { 
+	border: 3px solid grey; 
+}
+
+body{
+	/*background-color: green;*/
+	background: url("planet-earth-in-space.jpg") no-repeat bottom left;
+    background-size: 100% 100%;
+    min-height:100%;
+    background-attachment:  fixed;
+}
+
+footer{
+	color: white;
+	font-family: monospace;
+	text-align: center;
+}

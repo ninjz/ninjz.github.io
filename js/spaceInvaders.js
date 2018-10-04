@@ -1,5 +1,5 @@
 var canvas, context;
-var alien1, alien2, alien3, cannon, cannon_death, bullet, logo, bomb, 
+var alien1, alien2, alien3, alien4, alien5, cannon, cannon_death, bullet, logo, bomb, 
 death, alien1_1, alien2_1, alien3_1, bunker_01, bunker_02, bunker_03, bunker_04, bunker_05;
 var invaderArray = []; // contains 2d array of aliens
 
@@ -58,6 +58,10 @@ function init(){
 	alien2_1 = document.getElementById("alien2_1");
 	alien3 = document.getElementById("alien3");
 	alien3_1 = document.getElementById("alien3_1");
+	alien4 = document.getElementById("alien4");
+	alien4_1 = document.getElementById("alien4_1");
+	alien5 = document.getElementById("alien5");
+	alien5_1 = document.getElementById("alien5_1");
 	bullet = document.getElementById("bullet");
 	logo = document.getElementById("logo");
 	bomb = document.getElementById("bomb");
@@ -68,7 +72,7 @@ function init(){
 
 	canvas = document.getElementById("spaceInvaders");
 	context = canvas.getContext("2d");
-	context.fillStyle="black";
+	context.fillStyle="white";
 	context.fillRect(0,0,400,500);
 
 	displayMenu();
@@ -111,40 +115,40 @@ function loadAssets(){
 	var i;
 	var alien1X = 63;
 	var alien1Y = 20;
-	var alien1num = 9;
+	var alien1num = 6;
 
 	var alien2X = 50;
 	var alien2X_1 = 50;
 	var alien2Y = 45;
-	var alien2Y_1 = 70;
+	var alien2Y_1 = 80;
 
-	var alien2num = 8;
+	var alien2num = 7;
 
 	var alien3X = 50;
 	var alien3X_1 = 50;
-	var alien3Y = 95;
-	var alien3Y_1 = 120;
+	var alien3Y = 112;
+	var alien3Y_1 = 145;
 	var alien3num = 8;
 	
 	for(i = 0; i < alien1num; i++){
-		alien1Array.push(new Invader(alien1, alien1X += 25, alien1Y));
+		alien1Array.push(new Invader(alien1, alien1X += 35, alien1Y));
 	}
 
 
 	for(i = 0; i < alien2num; i++){
-		alien2Array.push(new Invader(alien2, alien2X += 30, alien2Y));
+		alien2Array.push(new Invader(alien2, alien2X += 35, alien2Y));
 	}
 
 	for(i = 0; i < alien2num; i++){
-		alien2Array_1.push(new Invader(alien2, alien2X_1 += 30, alien2Y_1));
+		alien2Array_1.push(new Invader(alien3, alien2X_1 += 35, alien2Y_1));
+	}
+
+	for(i = 0; i < alien3num - 2; i++){
+		alien3Array.push(new Invader(alien4, alien3X += 40, alien3Y));
 	}
 
 	for(i = 0; i < alien3num; i++){
-		alien3Array.push(new Invader(alien3, alien3X += 30, alien3Y));
-	}
-
-	for(i = 0; i < alien3num; i++){
-		alien3Array_1.push(new Invader(alien3, alien3X_1 += 30, alien3Y_1));
+		alien3Array_1.push(new Invader(alien5, alien3X_1 += 30, alien3Y_1));
 	}
 
 	invaderArray = [alien1Array, alien2Array, alien2Array_1, alien3Array, alien3Array_1];
@@ -171,13 +175,13 @@ function loadAssets(){
 function draw(){
 	var i = 0;
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	context.fillStyle="black";
+	context.fillStyle="white";
 	context.fillRect(0,0,400,500);
 
 	// HUD
 	var lifeX = 310;
 	context.font="15px monospace";
-	context.fillStyle="white";
+	context.fillStyle="black";
 	context.fillText("LIVES",250,485);	
 	context.fillText("SCORE:", 28,485);
 	context.fillText(score, 100,483);
@@ -251,13 +255,13 @@ function draw(){
 
 function displayMenu(){
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	context.fillStyle="black";
+	context.fillStyle="white";
 	context.fillRect(0,0,400,500);
 
-	context.drawImage(logo, 85, 80);
+	context.drawImage(logo, 50, 80, 300, 200);
 
 	context.font="13px monospace";
-	context.fillStyle="white";
+	context.fillStyle="black";
 
 	context.fillText("Press [SPACE] to start!",110,300);
 	window.addEventListener('keydown', handleInput, true);
@@ -437,7 +441,7 @@ function newGame(){
 	gameOverState = false;
 	player.alive = true;
 
-	delay = 800;
+	delay = 100;
 	speedIncrease = 0;
 	invaderSpeed = 0.2;
 	moveState = 0;
@@ -445,7 +449,7 @@ function newGame(){
 	level = 0;
 	score = 0;
 	time = 0;
-	decisionTime = 50;
+	decisionTime = 5;
 	choices = 95;
 
 	// empty these arrays
@@ -547,7 +551,9 @@ function Bunker(x, y){
 	this.draw=function(){
 		switch(this.state){
 			case 1:
+				context.fillStyle="white";
 				context.drawImage(bunker_01, this.x, this.y);
+
 				this.width = bunker_01.width;
 				this.height = bunker_01.height;
 				break;
@@ -581,7 +587,7 @@ function BunkerSection(x, y, lives){
 	this.timesHitBottom = 0;
 
 	this.draw = function(){
-		context.fillStyle="black";
+		context.fillStyle="white";
 		context.fillRect(this.startX,this.startY, bomb.width - 4, (this.timesHitTop*bomb.height) + 1);
 		if(this.origLife == 2 && this.lives == 0){
 			context.fillRect(this.startX, 
@@ -618,8 +624,8 @@ function Invader(type, x, y){
 	this.type = type;
 	this.x = x;
 	this.y = y;
-	this.width = type.width;
-	this.height = type.height;
+	this.width = type.width / 2;
+	this.height = type.height / 2;
 
 	this.moveDown=function(){
 		this.y += invaderSpeed;
@@ -639,23 +645,37 @@ function Invader(type, x, y){
 			{
 				case alien1:
 					if(switchFrame){
-						context.drawImage(alien1, this.x, this.y);
+						context.drawImage(alien1, this.x, this.y, this.width, this.height);
 					} else {
-						context.drawImage(alien1_1, this.x , this.y);
+						context.drawImage(alien1_1, this.x, this.y, this.width, this.height);
 					}
 					break;
 				case alien2:
 					if(switchFrame){
-						context.drawImage(alien2, this.x, this.y);
+						context.drawImage(alien2, this.x, this.y, this.width, this.height);
 					} else {
-						context.drawImage(alien2_1, this.x , this.y);
+						context.drawImage(alien2_1, this.x , this.y, this.width, this.height);
 					}
 					break;
 				case alien3:
 					if(switchFrame){
-						context.drawImage(alien3, this.x, this.y);
+						context.drawImage(alien3, this.x, this.y, this.width, this.height);
 					} else {
-						context.drawImage(alien3_1, this.x , this.y);
+						context.drawImage(alien3_1, this.x , this.y, this.width, this.height);
+					}
+					break;
+				case alien4:
+					if(switchFrame){
+						context.drawImage(alien4, this.x, this.y, this.width, this.height);
+					} else {
+						context.drawImage(alien4_1, this.x , this.y, this.width, this.height);
+					}
+					break;
+				case alien5:
+					if(switchFrame){
+						context.drawImage(alien5, this.x, this.y, this.width, this.height);
+					} else {
+						context.drawImage(alien5_1, this.x , this.y, this.width, this.height);
 					}
 					break;
 				default:
@@ -667,7 +687,7 @@ function Invader(type, x, y){
 
 	this.kill = function(){
 		this.alive = false;
-		context.fillStyle="black";
+		context.fillStyle="white";
 		context.fillRect(this.x,this.y,this.width,this.height);
 		context.drawImage(death, this.x - 3, this.y);
 		invaderPop--;
@@ -744,14 +764,14 @@ function Projectile(x, y){
 	this.active = true;
 	this.x = x;
 	this.y = y;
-	this.width = bullet.width;
-	this.height = bullet.height;
+	this.width = bullet.width / 3;
+	this.height = bullet.height / 3;
 
 	this.draw=function(){
 		
 		if(this.active && this.y >= 0){
 			//deallocate self
-			context.drawImage(bullet, this.x, this.y-=5);
+			context.drawImage(bullet, this.x - (this.width / 2), this.y-=5, this.width, this.height);
 		}
 		if(this.active){
 
@@ -906,6 +926,3 @@ function Bomb(x, y){
 		
 	};
 }
-
-
-

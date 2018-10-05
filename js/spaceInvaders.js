@@ -514,7 +514,7 @@ function gameOver(){
 	gameStarted = false;
 
 	context.font="23px monospace";
-	context.fillStyle="white";
+	context.fillStyle="black";
 
 	context.fillText("GAME OVER",130,250);
 
